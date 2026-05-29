@@ -1,6 +1,6 @@
 # Bodji Technologies Landing Page
 
-Static one-page landing site for Bodji Technologies.
+Static one-page landing site for Bodji Technologies, positioned around AI-ready workflows for high-stakes service operations.
 
 ## Preview
 
