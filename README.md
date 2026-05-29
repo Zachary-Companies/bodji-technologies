@@ -24,4 +24,4 @@ https://bodjitechnologies.com/
 
 ## Contact
 
-The contact form currently creates a mailto draft to `hello@bodjitechnologies.com`. Replace it with Formspree, Tally, HubSpot, or another form backend when the production intake destination is selected.
+The contact form currently creates a mailto draft to `sales@bodjisales.com`. Replace it with Formspree, Tally, HubSpot, or another form backend when the production intake destination is selected.
