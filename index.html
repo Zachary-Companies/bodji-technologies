@@ -5,16 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bodji Technologies | AI-ready workflows for regulated scientific services</title>
   <meta name="description" content="Bodji Technologies helps regulated scientific and diagnostic organizations turn complex services, evidence, and quality workflows into structured, AI-ready digital systems.">
+  <link rel="canonical" href="https://bodjitechnologies.com/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <meta property="og:title" content="Bodji Technologies">
   <meta property="og:description" content="AI-ready workflows for regulated scientific services.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/hero-lab-workflow.png">
+  <meta property="og:url" content="https://bodjitechnologies.com/">
+  <meta property="og:image" content="https://bodjitechnologies.com/assets/hero-lab-workflow.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bodji Technologies">
+  <meta name="twitter:description" content="AI-ready workflows for regulated scientific services.">
+  <meta name="twitter:image" content="https://bodjitechnologies.com/assets/hero-lab-workflow.png">
+  <meta name="theme-color" content="#07141a">
   <style>
     :root {
       color-scheme: light;
       --ink: #102027;
       --ink-strong: #07141a;
       --muted: #596a72;
+      --muted-strong: #475861;
       --paper: #f6f8f7;
       --white: #ffffff;
       --line: #d9e2df;
@@ -159,7 +168,7 @@
       background:
         linear-gradient(90deg, rgba(7, 20, 26, 0.92) 0%, rgba(7, 20, 26, 0.76) 42%, rgba(7, 20, 26, 0.18) 78%),
         linear-gradient(0deg, rgba(7, 20, 26, 0.52), rgba(7, 20, 26, 0.08)),
-        url("assets/hero-lab-workflow.png") center / cover no-repeat;
+        url("assets/hero-lab-workflow.jpg") center / cover no-repeat;
       color: var(--white);
       padding: 54px 0 58px;
     }
@@ -286,6 +295,48 @@
       margin-top: 16px;
     }
 
+    .workflow-diagram {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .workflow-node {
+      position: relative;
+      min-height: 112px;
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 12px 34px rgba(16, 32, 39, 0.08);
+      color: var(--ink-strong);
+      font-weight: 900;
+    }
+
+    .workflow-node span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted-strong);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    .workflow-node::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 2px;
+      background: var(--teal);
+    }
+
+    .workflow-node:last-child::after {
+      display: none;
+    }
+
     .grid {
       display: grid;
       gap: 16px;
@@ -382,10 +433,75 @@
     .use-case small {
       display: block;
       margin-top: 10px;
-      color: var(--muted);
+      color: var(--muted-strong);
       font-size: 13px;
       font-weight: 650;
       line-height: 1.45;
+    }
+
+    .about-panel,
+    .boundary-panel,
+    .example-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 28px;
+      align-items: start;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-panel {
+      background: var(--ink-strong);
+      color: var(--white);
+    }
+
+    .about-panel h2,
+    .boundary-panel h2 {
+      color: inherit;
+    }
+
+    .about-panel .sub {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .cred-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .cred-list li {
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 700;
+    }
+
+    .boundary-panel {
+      background: #fffaf0;
+      color: #3c3424;
+      border-color: #efd7a1;
+    }
+
+    .boundary-panel .sub {
+      color: #5f4a22;
+    }
+
+    .example-panel {
+      margin-top: 28px;
+      background: #eef5f3;
+    }
+
+    .example-panel p {
+      margin: 0;
+      color: var(--muted-strong);
+      font-size: 17px;
     }
 
     .process {
@@ -556,13 +672,27 @@
       .packages,
       .process,
       .use-case-list,
+      .workflow-diagram,
+      .about-panel,
+      .boundary-panel,
+      .example-panel,
       .contact-panel {
         grid-template-columns: 1fr;
       }
 
       .use-case,
+      .workflow-node,
       .step {
         min-height: auto;
+      }
+
+      .workflow-node::after {
+        top: auto;
+        right: auto;
+        left: 24px;
+        bottom: -10px;
+        width: 2px;
+        height: 10px;
       }
     }
 
@@ -588,7 +718,7 @@
         padding: 58px 0 70px;
         background:
           linear-gradient(90deg, rgba(7, 20, 26, 0.94) 0%, rgba(7, 20, 26, 0.82) 62%, rgba(7, 20, 26, 0.5) 100%),
-          url("assets/hero-lab-workflow.png") center / cover no-repeat;
+          url("assets/hero-lab-workflow.jpg") center / cover no-repeat;
       }
 
       h1 {
@@ -635,6 +765,7 @@
         </a>
         <div class="navlinks">
           <a href="#what">What We Do</a>
+          <a href="#why">Why Bodji</a>
           <a href="#process">Pilot Process</a>
           <a href="#packages">Pilot Options</a>
           <a href="#contact">Contact</a>
@@ -678,7 +809,25 @@
       </div>
     </section>
 
-    <section class="section-alt" id="problem">
+    <section class="section-alt" id="workflow">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Workflow Model</div>
+          <h2>From scattered requests to repeatable review workflows.</h2>
+          <p class="sub">Bodji gives teams a shared structure for the handoff between customers, commercial teams, scientific reviewers, quality stakeholders, and delivery owners.</p>
+        </div>
+        <div class="workflow-diagram" aria-label="Request to roadmap workflow">
+          <div class="workflow-node">Request<span>Customer or partner need arrives with context.</span></div>
+          <div class="workflow-node">Guided Intake<span>Required fields, constraints, and documents are collected.</span></div>
+          <div class="workflow-node">Evidence Pack<span>Certificates, notes, references, and metadata are attached.</span></div>
+          <div class="workflow-node">Technical Review<span>Owners compare, summarize, and route the work.</span></div>
+          <div class="workflow-node">Decision<span>Approvals, exceptions, and next steps are recorded.</span></div>
+          <div class="workflow-node">Roadmap<span>The team sees what to scale, integrate, or validate next.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem">
       <div class="wrap">
         <div class="section-head">
           <div class="kicker">Problem</div>
@@ -737,6 +886,35 @@
       </div>
     </section>
 
+    <section class="section-alt" id="why">
+      <div class="wrap">
+        <div class="about-panel">
+          <div>
+            <div class="kicker">Why Bodji</div>
+            <h2>Built by senior engineers for complex workflow systems.</h2>
+            <p class="sub">Bodji Technologies is led by engineers with experience in enterprise platforms, internal tools, telemetry, automation, AI workflows, and production software architecture.</p>
+          </div>
+          <ul class="cred-list">
+            <li>We help teams start with one workflow, prove value, and scale deliberately.</li>
+            <li>We design around existing systems, stakeholder ownership, and operational risk boundaries.</li>
+            <li>We focus on structured data, reusable evidence, approval control, and workflows that can be reviewed later.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="boundary-panel">
+          <div>
+            <div class="kicker">Boundaries</div>
+            <h2>Bodji is not a replacement for your LIMS, QMS, ERP, or validated systems of record.</h2>
+          </div>
+          <p class="sub">Bodji begins as a workflow and evidence layer around high-friction scientific service processes: intake, scoping, review, evidence packaging, and decision support. Production integrations, validation support, regulated data handling, and enterprise deployment are scoped separately.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section-alt" id="use-cases">
       <div class="wrap">
         <div class="section-head">
@@ -749,6 +927,13 @@
           <div class="use-case">Custom biomaterials<small>Translate custom service scoping into fields, constraints, and decision points.</small></div>
           <div class="use-case">Testing services<small>Guide customers toward complete request data before technical review starts.</small></div>
           <div class="use-case">Support workflows<small>Route technical questions with reusable context, evidence, and owner control.</small></div>
+        </div>
+        <div class="example-panel">
+          <div>
+            <div class="kicker">Example Pilot</div>
+            <h2>Diagnostic partnership intake</h2>
+          </div>
+          <p>A partner submits assay context, organism or material requirements, technical constraints, timeline, and supporting evidence through a guided workflow. Bodji structures the request, routes it to the right reviewers, attaches evidence, and creates a repeatable decision trail.</p>
         </div>
       </div>
     </section>
@@ -837,7 +1022,7 @@
             </ul>
           </article>
         </div>
-        <p class="note">Platform subscription, token/model costs, production integrations, validation support, and enterprise hosting are quoted separately.</p>
+        <p class="note">Pilot fees cover professional services and prototype work. Bodji platform access, token/model usage, production hosting, integrations, validation support, and enterprise licensing are scoped separately.</p>
       </div>
     </section>
 
@@ -848,6 +1033,7 @@
             <div class="kicker">Contact</div>
             <h2>Start with one workflow.</h2>
             <p class="sub">Tell Bodji Technologies which intake, scoping, evidence, or review workflow you want to make structured and AI-ready first.</p>
+            <p class="sub"><strong>Not sure which workflow to start with?</strong> Begin with a short opportunity sprint to identify the best first use case and define the pilot boundary.</p>
             <p class="contact-direct">hello@bodjitechnologies.com</p>
           </div>
           <form id="contactForm">

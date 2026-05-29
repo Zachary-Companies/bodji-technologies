@@ -14,8 +14,14 @@ Then visit `http://localhost:8080`.
 
 ## Deploy
 
-This folder is ready for GitHub Pages. Put the contents at the root of a Pages-enabled repo and publish from the default branch.
+This folder is deployed through GitHub Pages from the root of `main`.
+
+Production domain:
+
+```text
+https://bodjitechnologies.com/
+```
 
 ## Contact
 
-The contact form creates a mailto draft to `hello@bodjitechnologies.com`. Replace that address in `index.html` if the final inbox is different.
+The contact form currently creates a mailto draft to `hello@bodjitechnologies.com`. Replace it with Formspree, Tally, HubSpot, or another form backend when the production intake destination is selected.
