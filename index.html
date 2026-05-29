@@ -534,6 +534,11 @@
       align-items: stretch;
     }
 
+    .packages.single {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 460px;
+    }
+
     .package {
       display: flex;
       flex-direction: column;
@@ -981,10 +986,10 @@
       <div class="wrap">
         <div class="section-head">
           <div class="kicker">Pilot Options</div>
-          <h2>Three clean ways to start.</h2>
-          <p class="sub">Pick the level of proof you need before asking teams to commit to a broader platform or implementation path.</p>
+          <h2>Start with a focused opportunity sprint.</h2>
+          <p class="sub">Use one bounded engagement to identify the right workflow, define the pilot boundary, and decide what level of proof is worth building next.</p>
         </div>
-        <div class="packages">
+        <div class="packages single">
           <article class="package">
             <span class="label">Discovery</span>
             <h3>Opportunity Sprint</h3>
@@ -997,34 +1002,8 @@
               <li>Risk boundary memo</li>
             </ul>
           </article>
-          <article class="package featured">
-            <span class="label">Recommended</span>
-            <h3>Workflow Blueprint</h3>
-            <div class="price">$42,000</div>
-            <p>Design one high-stakes workflow as a structured Bodji-ready system.</p>
-            <ul>
-              <li>Workflow catalog model</li>
-              <li>Guided intake workflow</li>
-              <li>Evidence package outline</li>
-              <li>Data-field dictionary</li>
-              <li>30/60/90 roadmap</li>
-            </ul>
-          </article>
-          <article class="package">
-            <span class="label">Prototype</span>
-            <h3>Workflow Pilot</h3>
-            <div class="price">$95,000+</div>
-            <p>Build a non-production prototype your stakeholders can evaluate.</p>
-            <ul>
-              <li>Everything in Workflow Blueprint</li>
-              <li>Prototype workspace</li>
-              <li>Demo script</li>
-              <li>Success metrics</li>
-              <li>Phase-two proposal</li>
-            </ul>
-          </article>
         </div>
-        <p class="note">Pilot fees cover professional services and prototype work. Bodji platform access, token/model usage, production hosting, integrations, validation support, and enterprise licensing are scoped separately.</p>
+        <p class="note">Pilot fees cover professional services and discovery work. Platform access, prototype builds, model/token usage, production hosting, integrations, validation support, and enterprise licensing are scoped separately.</p>
       </div>
     </section>
 
