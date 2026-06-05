@@ -1,0 +1,6 @@
+{
+  "name": "Bodji Technologies",
+  "description": "A polished landing page helping businesses become AI-readable and action-ready.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
