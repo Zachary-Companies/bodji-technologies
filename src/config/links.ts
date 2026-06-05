@@ -1,5 +1,6 @@
 export const LINKS = {
-  checker: "https://landing.beacon.zacharycompanies.ai/check",
-  course: "https://landing.beacon.zacharycompanies.ai/course",
+  // Hosted on this same site now (AWS S3/CloudFront), so back-links return here.
+  checker: "/check",
+  course: "/course.html",
   contact: "mailto:sales@bodjisales.com?subject=Talk%20to%20Bodji%20Technologies"
 } as const;

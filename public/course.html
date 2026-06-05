@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 7-Minute Primer on AI & Your Business — Bodji Beacon</title>
+  <meta name="description" content="A short, plain-English course for business owners on why being visible to AI assistants matters — and what to do about it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #faf8f3;
+      --color-surface: #ffffff;
+      --color-surface-warm: #fdfaf2;
+      --color-text: #1c1917;
+      --color-text-muted: #57534e;
+      --color-text-subtle: #a8a29e;
+      --color-border: #e7e5e0;
+      --color-border-strong: #d6d3ce;
+      --color-accent: #b45309;
+      --color-accent-hover: #92400e;
+      --color-accent-soft: #fef3c7;
+      --color-accent-ink: #78350f;
+      --color-success: #15803d;
+      --color-success-soft: #dcfce7;
+      --color-danger: #b91c1c;
+      --color-danger-soft: #fee2e2;
+      --color-info: #1d4ed8;
+      --color-info-soft: #dbeafe;
+
+      --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+
+      --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04), 0 1px 3px rgba(28, 25, 23, 0.06);
+      --shadow-md: 0 4px 6px rgba(28, 25, 23, 0.04), 0 10px 20px rgba(28, 25, 23, 0.05);
+      --shadow-lg: 0 12px 24px rgba(28, 25, 23, 0.08), 0 20px 50px rgba(28, 25, 23, 0.06);
+
+      --max-content: 680px;
+      --max-wide: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--color-accent); text-decoration: none; border-bottom: 1px solid currentColor; transition: color .15s; }
+    a:hover { color: var(--color-accent-hover); }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0 0 var(--space-4);
+      color: var(--color-text);
+    }
+
+    h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; }
+    h2 { font-size: clamp(1.6rem, 3.2vw, 2.25rem); }
+    h3 { font-size: 1.3rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.01em; }
+    h4 { font-size: 1rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: 0; text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 0.06em; font-size: 0.8rem; }
+
+    p { margin: 0 0 var(--space-5); color: var(--color-text); }
+    p.lead { font-size: 1.2rem; color: var(--color-text-muted); line-height: 1.55; }
+
+    strong { font-weight: 600; color: var(--color-text); }
+
+    ul, ol { padding-left: var(--space-6); margin: 0 0 var(--space-5); }
+    li { margin-bottom: var(--space-2); }
+
+    /* progress bar */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: transparent; z-index: 100;
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      background: var(--color-accent);
+      transition: width .1s ease-out;
+    }
+
+    /* layout */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      gap: var(--space-16);
+      padding: var(--space-12) var(--space-6);
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; gap: var(--space-8); padding: var(--space-8) var(--space-5); }
+    }
+
+    /* nav */
+    .side-nav {
+      position: sticky;
+      top: var(--space-12);
+      align-self: start;
+      padding-top: var(--space-4);
+    }
+    .back-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: 999px;
+      background: var(--color-surface);
+      margin-bottom: var(--space-6);
+      transition: all 0.18s ease;
+    }
+    .back-pill:hover {
+      color: var(--color-accent-ink);
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+      transform: translateX(-2px);
+    }
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-2);
+      color: var(--color-text);
+    }
+    .nav-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-8);
+      font-weight: 600;
+    }
+    .nav-list { list-style: none; padding: 0; margin: 0; border-left: 1px solid var(--color-border); }
+    .nav-list li { margin: 0; }
+    .nav-list a {
+      display: block;
+      padding: var(--space-2) var(--space-4);
+      font-size: 0.875rem;
+      color: var(--color-text-subtle);
+      border: none;
+      border-left: 2px solid transparent;
+      margin-left: -1px;
+      transition: all .15s;
+      line-height: 1.4;
+    }
+    .nav-list a:hover { color: var(--color-text); }
+    .nav-list a.active { color: var(--color-accent); border-left-color: var(--color-accent); font-weight: 500; }
+    .nav-num { font-variant-numeric: tabular-nums; color: var(--color-text-subtle); margin-right: var(--space-2); font-size: 0.8em; }
+
+    @media (max-width: 900px) {
+      .side-nav { position: static; }
+      .nav-list { display: none; }
+    }
+
+    /* main */
+    main { max-width: var(--max-content); }
+
+    .hero {
+      padding: var(--space-8) 0 var(--space-16);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: var(--space-16);
+    }
+    .hero .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      font-weight: 600;
+      margin-bottom: var(--space-5);
+    }
+    .hero .meta {
+      display: flex;
+      gap: var(--space-5);
+      font-size: 0.875rem;
+      color: var(--color-text-subtle);
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-border);
+    }
+    .hero .meta strong { color: var(--color-text-muted); font-weight: 500; }
+
+    /* sections */
+    section.chapter {
+      padding: var(--space-12) 0;
+      scroll-margin-top: var(--space-8);
+    }
+    section.chapter + section.chapter { border-top: 1px solid var(--color-border); }
+
+    .chapter-num {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-4);
+      padding: var(--space-1) var(--space-3);
+      background: var(--color-accent-soft);
+      border-radius: var(--radius-pill);
+      font-weight: 500;
+    }
+
+    blockquote {
+      margin: var(--space-8) 0;
+      padding: var(--space-2) 0 var(--space-2) var(--space-6);
+      border-left: 3px solid var(--color-accent);
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* callout cards */
+    .callout {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      margin: var(--space-8) 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .callout h4 { margin-top: 0; margin-bottom: var(--space-2); }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* timeline */
+    .timeline {
+      margin: var(--space-8) 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .timeline-track {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      margin: var(--space-6) 0 var(--space-8);
+      padding: 0 var(--space-2);
+    }
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--color-border-strong);
+      z-index: 0;
+    }
+    .timeline-dot {
+      position: relative;
+      z-index: 1;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0;
+      font-family: inherit;
+      flex: 1;
+    }
+    .timeline-dot .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      border: 2px solid var(--color-border-strong);
+      transition: all .2s;
+    }
+    .timeline-dot .year {
+      font-size: 0.75rem;
+      color: var(--color-text-subtle);
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
+    .timeline-dot .label {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      max-width: 90px;
+      line-height: 1.25;
+    }
+    .timeline-dot.active .dot { background: var(--color-accent); border-color: var(--color-accent); transform: scale(1.2); }
+    .timeline-dot.active .year, .timeline-dot.active .label { color: var(--color-accent); font-weight: 600; }
+    .timeline-dot:hover .dot { border-color: var(--color-accent); }
+
+    .timeline-panel {
+      padding: var(--space-5) var(--space-6);
+      background: var(--color-surface-warm);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      min-height: 100px;
+    }
+    .timeline-panel h4 { color: var(--color-text); margin-bottom: var(--space-2); text-transform: none; letter-spacing: 0; font-size: 1rem; font-family: var(--font-sans); }
+    .timeline-panel .scene { font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: var(--space-2); }
+    .timeline-panel .scene strong { color: var(--color-text); font-weight: 500; }
+    .timeline-panel .scene em { color: var(--color-accent-ink); font-style: normal; font-weight: 500; }
+
+    /* demo / before-after */
+    .demo {
+      margin: var(--space-8) 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .demo-input {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+    }
+    .demo-input input {
+      flex: 1;
+      min-width: 200px;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border .15s;
+    }
+    .demo-input input:focus { outline: none; border-color: var(--color-accent); }
+    .demo-input button {
+      padding: var(--space-3) var(--space-5);
+      background: var(--color-text);
+      color: var(--color-bg);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .demo-input button:hover { background: var(--color-accent); }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+    @media (max-width: 700px) {
+      .demo-grid { grid-template-columns: 1fr; }
+    }
+
+    .demo-card {
+      padding: var(--space-5);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+    }
+    .demo-card.bad { background: var(--color-danger-soft); border-color: #fecaca; }
+    .demo-card.good { background: var(--color-success-soft); border-color: #bbf7d0; }
+    .demo-card h4 {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+      text-transform: uppercase;
+    }
+    .demo-card.bad h4 { color: var(--color-danger); }
+    .demo-card.good h4 { color: var(--color-success); }
+    .demo-card .ai-response {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      font-family: var(--font-sans);
+    }
+    .demo-card .ai-response em { color: var(--color-text-muted); font-style: italic; }
+    .demo-card .biz-name { font-weight: 600; }
+
+    /* compare list (cost of doing nothing) */
+    .cost-list {
+      margin: var(--space-6) 0;
+      padding: 0;
+      list-style: none;
+    }
+    .cost-list li {
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+    .cost-list li:last-child { border-bottom: none; }
+    .cost-list .marker {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* self-assessment */
+    .quiz {
+      margin: var(--space-8) 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-md);
+    }
+    .quiz h3 { margin-top: 0; }
+    .quiz-question {
+      padding: var(--space-5) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .quiz-question:last-of-type { border-bottom: none; }
+    .quiz-question p { margin-bottom: var(--space-3); font-weight: 500; }
+    .quiz-options { display: flex; gap: var(--space-3); }
+    .quiz-options button {
+      flex: 1;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-bg);
+      color: var(--color-text-muted);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all .15s;
+      font-weight: 500;
+    }
+    .quiz-options button:hover { border-color: var(--color-accent); color: var(--color-text); }
+    .quiz-options button.selected[data-val="yes"] { background: var(--color-success-soft); border-color: var(--color-success); color: var(--color-success); }
+    .quiz-options button.selected[data-val="no"] { background: var(--color-danger-soft); border-color: var(--color-danger); color: var(--color-danger); }
+    .quiz-options button.selected[data-val="unsure"] { background: var(--color-info-soft); border-color: var(--color-info); color: var(--color-info); }
+
+    .quiz-result {
+      margin-top: var(--space-6);
+      padding: var(--space-6);
+      background: var(--color-accent-soft);
+      border-radius: var(--radius-sm);
+      border: 1px solid #fde68a;
+      display: none;
+    }
+    .quiz-result.show { display: block; }
+    .quiz-result h4 {
+      color: var(--color-accent-ink);
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      text-transform: none;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-2);
+    }
+    .quiz-result p { margin-bottom: 0; color: var(--color-accent-ink); }
+
+    /* CTA */
+    .cta {
+      margin: var(--space-16) 0 var(--space-8);
+      padding: var(--space-10);
+      background: var(--color-text);
+      color: var(--color-bg);
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+    .cta h3 {
+      color: var(--color-bg);
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      text-transform: none;
+      margin-bottom: var(--space-4);
+    }
+    .cta p { color: rgba(250, 248, 243, 0.75); margin-bottom: var(--space-6); }
+    .cta-actions { display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap; }
+    .cta a {
+      display: inline-block;
+      padding: var(--space-3) var(--space-6);
+      background: var(--color-accent);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: none;
+      transition: background .15s;
+    }
+    .cta a:hover { background: var(--color-accent-hover); color: white; }
+    .cta a.secondary {
+      background: transparent;
+      color: var(--color-bg);
+      border: 1px solid rgba(250, 248, 243, 0.3);
+    }
+    .cta a.secondary:hover { border-color: var(--color-bg); background: rgba(250, 248, 243, 0.05); }
+
+    /* footer */
+    footer {
+      padding: var(--space-12) 0 var(--space-8);
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--space-8);
+      color: var(--color-text-subtle);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    /* small touches */
+    .pill {
+      display: inline-block;
+      padding: 2px 10px;
+      background: var(--color-accent-soft);
+      color: var(--color-accent-ink);
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .pill.cool { background: var(--color-info-soft); color: var(--color-info); }
+    .pill.warn { background: var(--color-danger-soft); color: var(--color-danger); }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--color-accent);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+      margin-left: 1px;
+    }
+    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+    .fade-in { opacity: 0; transform: translateY(8px); transition: opacity .5s, transform .5s; }
+    .fade-in.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Course chapters">
+      <a href="/" class="back-pill">&larr;&nbsp; Back to main site</a>
+      <a href="/" class="nav-brand" style="text-decoration: none; color: inherit; display: block;">Bodji Beacon</a>
+      <div class="nav-tag">A 7-min primer</div>
+      <ol class="nav-list">
+        <li><a href="#ch1" data-target="ch1"><span class="nav-num">01</span>It&rsquo;s 1998 again</a></li>
+        <li><a href="#ch2" data-target="ch2"><span class="nav-num">02</span>How customers find you</a></li>
+        <li><a href="#ch3" data-target="ch3"><span class="nav-num">03</span>What AI sees today</a></li>
+        <li><a href="#ch4" data-target="ch4"><span class="nav-num">04</span>The shelf you can&rsquo;t see</a></li>
+        <li><a href="#ch5" data-target="ch5"><span class="nav-num">05</span>GEO: the new SEO</a></li>
+        <li><a href="#ch6" data-target="ch6"><span class="nav-num">06</span>What is MCP, really?</a></li>
+        <li><a href="#ch7" data-target="ch7"><span class="nav-num">07</span>The cost of doing nothing</a></li>
+        <li><a href="#ch8" data-target="ch8"><span class="nav-num">08</span>Are you ready?</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <header class="hero">
+        <div class="eyebrow">A primer for business owners</div>
+        <h1>Your business is about to get a new kind of customer. Most owners aren&rsquo;t ready.</h1>
+        <p class="lead">In the next few years, more of your customers will find you through an AI assistant than through a Google search. This is a 7-minute course on what that means, why it matters, and what you can do about it, in plain English, no jargon.</p>
+      </header>
+
+      <section class="chapter" id="ch1">
+        <span class="chapter-num">CHAPTER 01</span>
+        <h2>It&rsquo;s 1998 again.</h2>
+        <p>In 1998, most business owners thought they didn&rsquo;t need a website. The phone book was still working. Customers still walked in. The internet was &ldquo;for tech companies.&rdquo;</p>
+        <p>By 2005, every business needed one. The owners who built one early got found. The ones who waited spent the next decade catching up.</p>
+        <blockquote>We&rsquo;re in the exact same window right now, but with AI. And the gap from &ldquo;optional&rdquo; to &ldquo;mandatory&rdquo; is closing a lot faster this time.</blockquote>
+        <p>This course is short on purpose. By the end, you&rsquo;ll know <strong>what&rsquo;s actually changing</strong>, <strong>why it matters for your business specifically</strong>, and <strong>what you can do without becoming a software engineer.</strong></p>
+      </section>
+
+      <section class="chapter" id="ch2">
+        <span class="chapter-num">CHAPTER 02</span>
+        <h2>How customers find you has changed five times already.</h2>
+        <p>You probably remember a couple of these. Click through to see how a customer would&rsquo;ve looked for a local business at each point, and where your business needed to be in order to be found.</p>
+
+        <div class="timeline">
+          <div class="timeline-track" id="timelineTrack">
+            <button class="timeline-dot" data-era="phonebook">
+              <span class="dot"></span><span class="year">1985</span><span class="label">Phone book</span>
+            </button>
+            <button class="timeline-dot" data-era="yp">
+              <span class="dot"></span><span class="year">2000</span><span class="label">YellowPages.com</span>
+            </button>
+            <button class="timeline-dot active" data-era="google">
+              <span class="dot"></span><span class="year">2008</span><span class="label">Google</span>
+            </button>
+            <button class="timeline-dot" data-era="yelp">
+              <span class="dot"></span><span class="year">2014</span><span class="label">Yelp &amp; Maps</span>
+            </button>
+            <button class="timeline-dot" data-era="social">
+              <span class="dot"></span><span class="year">2020</span><span class="label">TikTok &amp; Instagram</span>
+            </button>
+            <button class="timeline-dot" data-era="ai">
+              <span class="dot"></span><span class="year">2026</span><span class="label">AI assistants</span>
+            </button>
+          </div>
+          <div class="timeline-panel" id="timelinePanel">
+            <!-- filled by JS -->
+          </div>
+        </div>
+
+        <p>Notice the pattern: every shift, a new layer appears <em>between you and your customer</em>. If you don&rsquo;t show up <strong>well</strong> in that layer, the customer never reaches you. They reach whoever showed up better.</p>
+        <p>The latest layer is AI assistants: ChatGPT, Claude, Gemini, Perplexity, Apple Intelligence, and the dozen others your customers will use in the next two years.</p>
+      </section>
+
+      <section class="chapter" id="ch3">
+        <span class="chapter-num">CHAPTER 03</span>
+        <h2>Here&rsquo;s the kind of answer AI is stuck giving today.</h2>
+        <p>Type any business name below. We&rsquo;ll show you an <em>illustration</em>, not a screenshot, of the shape of answer an AI assistant typically has to give when it&rsquo;s piecing your business together from scattered websites and directories, versus what&rsquo;s possible when the business publishes a structured profile it can actually read.</p>
+
+        <div class="demo">
+          <div class="demo-input">
+            <input id="bizInput" type="text" placeholder="e.g. Joe's Pizza, Minneapolis" value="Joe's Pizza, Minneapolis" />
+            <button id="bizGo">See the difference</button>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card bad">
+              <h4>Typical AI answer today</h4>
+              <div class="ai-response" id="aiBefore"></div>
+            </div>
+            <div class="demo-card good">
+              <h4>AI answer with a Beacon profile</h4>
+              <div class="ai-response" id="aiAfter"></div>
+            </div>
+          </div>
+        </div>
+
+        <p>These are illustrations, not real AI outputs. Every assistant has indexed something different about every business, and the exact answer changes by the week. But the <em>shape</em> of the problem is real: with no structured profile, AI assistants are stitching your business together from a website, Yelp, Google, and a handful of directories that often disagree. The result is fragmented, often stale, and the AI can&rsquo;t actually <em>do</em> anything for the customer. It just guesses.</p>
+        <p>With a structured, owner-controlled profile that AI assistants can read directly, the answer gets sharper, current, and, most importantly, actionable.</p>
+      </section>
+
+      <section class="chapter" id="ch4">
+        <span class="chapter-num">CHAPTER 04</span>
+        <h2>AI assistants aren&rsquo;t just answering questions. They&rsquo;re doing things.</h2>
+        <p>This is the part most people miss. AI assistants have crossed a line in the last year. They used to <em>summarize</em>. Now they <strong>act on your behalf.</strong></p>
+        <p>Watch what your customers are already doing:</p>
+        <ul>
+          <li>&ldquo;Find me a vegetarian-friendly restaurant near downtown that&rsquo;s open right now and book a table for two at 7.&rdquo;</li>
+          <li>&ldquo;Which HVAC company near me has the best reviews <em>and</em> can come tomorrow morning? Get me a quote.&rdquo;</li>
+          <li>&ldquo;Order my regular from the closest taco place. Make it gluten-free this time.&rdquo;</li>
+        </ul>
+        <p>The customer isn&rsquo;t browsing your website. They aren&rsquo;t scrolling through Yelp. They&rsquo;re telling an AI what they want, and the AI is picking, comparing, and booking on their behalf.</p>
+
+        <div class="callout">
+          <h4>The new aisle</h4>
+          <p>Think of it like a new shopping aisle that your competitors are already on. You can&rsquo;t see it. You can&rsquo;t walk down it. But your customers are already there, and the AI is picking what&rsquo;s on the shelf. Right now, if your business isn&rsquo;t formatted to be on that shelf, it doesn&rsquo;t exist to those customers.</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="ch5">
+        <span class="chapter-num">CHAPTER 05</span>
+        <h2>GEO: the new SEO.</h2>
+        <p>You probably know SEO (Search Engine Optimization). It&rsquo;s the work of making Google show your business when someone searches for what you do. Every business owner has paid someone for SEO at some point, even if they didn&rsquo;t love it.</p>
+        <p>GEO is the same idea, <strong>but for AI</strong>.</p>
+        <p><span class="pill">GEO</span> &nbsp;Generative Engine Optimization. Making sure AI assistants can find, understand, trust, and recommend your business when their users ask.</p>
+        <p>Here&rsquo;s the key difference, and why GEO is a bigger deal than SEO ever was:</p>
+
+        <div class="callout">
+          <h4>SEO was about ranking. GEO is about being the answer.</h4>
+          <p>On Google, customers see ten blue links. They can click yours even if you&rsquo;re #4. With AI, the customer gets <strong>one</strong> answer. Either the AI recommends you, or it doesn&rsquo;t. There is no &ldquo;page two.&rdquo;</p>
+        </div>
+
+        <p>The businesses that figure out GEO early are going to dominate their category for the same reason early-SEO businesses dominated 2005-2015. The window is open right now.</p>
+      </section>
+
+      <section class="chapter" id="ch6">
+        <span class="chapter-num">CHAPTER 06</span>
+        <h2>What&rsquo;s an MCP endpoint? (One paragraph.)</h2>
+        <p><span class="pill cool">MCP</span> &nbsp;Model Context Protocol. It&rsquo;s the new standard that AI assistants use to read information from a business, and to take actions like checking your hours, comparing your prices, or booking an appointment, <strong>without bothering you every time</strong>.</p>
+        <p>Plain English: it&rsquo;s a tidy, structured way for AI assistants to know what your business does, what you&rsquo;re offering, and what you&rsquo;re willing to let them do for customers on your behalf.</p>
+
+        <div class="callout">
+          <h4>You stay in control.</h4>
+          <p>You decide what AI assistants can see (hours, services, deals), what they can do (take a booking, send a quote), and what they always need your approval for (anything over $X, anything outside your normal services). They stop having to guess. You stop missing customers.</p>
+        </div>
+
+        <p>Think of an MCP endpoint as <strong>your business&rsquo;s passport for the AI internet</strong>. Without one, AI assistants make do with whatever scraps they can find online. With one, your business shows up cleanly, currently, and ready to take action.</p>
+      </section>
+
+      <section class="chapter" id="ch7">
+        <span class="chapter-num">CHAPTER 07</span>
+        <h2>The cost of doing nothing.</h2>
+        <p>It&rsquo;s easy to read all this and think, &ldquo;Sure, but I&rsquo;ll deal with it when it&rsquo;s mainstream.&rdquo; That&rsquo;s exactly what 1998&rsquo;s holdouts told themselves about websites. Here&rsquo;s what waiting actually costs you, in concrete terms:</p>
+
+        <ul class="cost-list">
+          <li><span class="marker">&rarr;</span><div>Every time a customer asks an AI assistant for a recommendation in your category and it picks a competitor instead of you, because that competitor is readable and you&rsquo;re not. <strong>That&rsquo;s a customer you&rsquo;ll never know you lost.</strong></div></li>
+          <li><span class="marker">&rarr;</span><div>Every time the AI quotes <em>wrong hours</em> from a stale Yelp listing and your customer shows up to a closed door, <strong>they don&rsquo;t blame the AI. They blame you.</strong></div></li>
+          <li><span class="marker">&rarr;</span><div>Every time someone says &ldquo;book me a slot with your competitor&rdquo; instead of &ldquo;book me a slot with you,&rdquo; <strong>you&rsquo;re paying for that visibility gap in revenue you&rsquo;ll never count.</strong></div></li>
+          <li><span class="marker">&rarr;</span><div>Every month you wait, more of your competitors will get this right, and you&rsquo;ll be the one paying double to catch up later, exactly like late SEO adopters did.</div></li>
+        </ul>
+
+        <blockquote>The customers aren&rsquo;t coming back to Google to double-check. The AI&rsquo;s answer is the answer.</blockquote>
+      </section>
+
+      <section class="chapter" id="ch8">
+        <span class="chapter-num">CHAPTER 08</span>
+        <h2>Are you ready for AI customers? 5 questions.</h2>
+        <p>Answer honestly. It takes 90 seconds.</p>
+
+        <div class="quiz" id="quiz">
+          <div class="quiz-question" data-q="1">
+            <p>1. If a customer asked ChatGPT &ldquo;is your business open right now?&rdquo; would the AI get the right answer?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="2">
+            <p>2. If a customer asked an AI to book or reserve something with you, could it actually do that without calling you?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="3">
+            <p>3. Do you have any way of seeing when an AI assistant has talked about your business to a customer?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="4">
+            <p>4. Are your services, prices, and current deals available to AI assistants in a clean, current format?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="5">
+            <p>5. Have you defined what AI assistants are allowed to commit to on your behalf?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+
+          <div class="quiz-result" id="quizResult">
+            <h4 id="quizHeading"></h4>
+            <p id="quizBody"></p>
+          </div>
+        </div>
+
+        <p>If most of your answers were &ldquo;no&rdquo; or &ldquo;not sure,&rdquo; that&rsquo;s normal. Almost every business is in the same spot. The good news is the fix doesn&rsquo;t require a developer, a re-do of your website, or any technical work on your part.</p>
+
+        <div class="cta">
+          <h3>That fix is exactly what Bodji Beacon does.</h3>
+          <p>We turn your business into an AI-readable profile and a controlled action layer, so AI assistants can find you, recommend you, and book with you, while you stay in charge of everything. See a 5-minute demo.</p>
+          <div class="cta-actions">
+            <a href="/">Schedule a meeting</a>
+            <a href="https://signal.beacon.zacharycompanies.ai/reports/cedar-table-cafe" class="secondary">See a real example</a>
+          </div>
+        </div>
+
+        <footer>
+          <p>Bodji Beacon &middot; Built by Zachary Companies &middot; Questions? <a href="mailto:hello@beacon.zacharycompanies.ai">hello@beacon.zacharycompanies.ai</a></p>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Redirect back-to-landing links to the section the visitor came from.
+    // Triggered by /course?return=<anchor>. Safely sanitized to letters,
+    // numbers, dashes, and underscores.
+    (function rewireReturnTo() {
+      const returnParam = new URLSearchParams(window.location.search).get('return');
+      if (!returnParam || !/^[a-zA-Z0-9_-]+$/.test(returnParam)) return;
+      const target = '/#' + returnParam;
+      document.querySelectorAll('.back-pill, .nav-brand').forEach((el) => {
+        el.setAttribute('href', target);
+      });
+    })();
+
+    // progress bar
+    const progressFill = document.getElementById('progressFill');
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressFill.style.width = pct + '%';
+    });
+
+    // active section in nav
+    const navLinks = document.querySelectorAll('.nav-list a');
+    const sections = document.querySelectorAll('section.chapter');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          navLinks.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(s => observer.observe(s));
+
+    // fade-in animation for chapters
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          fadeObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(s => { s.classList.add('fade-in'); fadeObserver.observe(s); });
+
+    // timeline content
+    const eras = {
+      phonebook: {
+        title: 'The Yellow Pages',
+        scene: `<strong>The customer:</strong> flips through a fat paper book at the kitchen table.<br/><strong>To be found:</strong> you needed an ad in the right book in the right city, and a memorable name starting with &ldquo;A.&rdquo;`
+      },
+      yp: {
+        title: 'YellowPages.com & directories',
+        scene: `<strong>The customer:</strong> types &ldquo;HVAC near me&rdquo; into a clunky directory site.<br/><strong>To be found:</strong> you needed a clean directory listing, an actual website, and someone managing it.`
+      },
+      google: {
+        title: 'Google Search',
+        scene: `<strong>The customer:</strong> Googles, scans 10 links, picks one.<br/><strong>To be found:</strong> you needed SEO, and probably paid Google for ads too. <em>You&rsquo;re here.</em>`
+      },
+      yelp: {
+        title: 'Yelp, Google Maps, reviews',
+        scene: `<strong>The customer:</strong> searches Maps, reads star ratings, sorts by reviews.<br/><strong>To be found:</strong> you needed verified profiles, current photos, good reviews, and someone replying to bad ones.`
+      },
+      social: {
+        title: 'TikTok, Instagram, social discovery',
+        scene: `<strong>The customer:</strong> sees a 15-second video and saves your address.<br/><strong>To be found:</strong> you needed content, a face, a vibe, and someone making videos every week.`
+      },
+      ai: {
+        title: 'AI assistants',
+        scene: `<strong>The customer:</strong> says &ldquo;find me the best one and book it.&rdquo;<br/><strong>To be found:</strong> you need to be <em>readable and actionable</em> by AI assistants directly. This is the new thing. Almost no business has it yet.`
+      }
+    };
+    const tlPanel = document.getElementById('timelinePanel');
+    const tlDots = document.querySelectorAll('.timeline-dot');
+    function setEra(name) {
+      tlDots.forEach(d => d.classList.toggle('active', d.dataset.era === name));
+      const e = eras[name];
+      tlPanel.innerHTML = `<h4>${e.title}</h4><div class="scene">${e.scene}</div>`;
+    }
+    tlDots.forEach(d => d.addEventListener('click', () => setEra(d.dataset.era)));
+    setEra('google');
+
+    // demo: business name input
+    const bizInput = document.getElementById('bizInput');
+    const bizGo = document.getElementById('bizGo');
+    const aiBefore = document.getElementById('aiBefore');
+    const aiAfter = document.getElementById('aiAfter');
+
+    function renderDemo() {
+      const raw = bizInput.value.trim() || "Joe's Pizza, Minneapolis";
+      const name = raw.split(',')[0].trim();
+      const city = (raw.split(',')[1] || 'your area').trim();
+
+      aiBefore.innerHTML = `
+        <p>&ldquo;<span class="biz-name">${escape(name)}</span> appears to be a business in <em>${escape(city)}</em>. Their website mentions some services. <em>Hours may vary. Different sites list different times.</em> I don&rsquo;t see current pricing or availability. <em>I&rsquo;m not able to book or check directly</em>. You may want to call them to confirm.&rdquo;</p>
+      `;
+
+      aiAfter.innerHTML = `
+        <p>&ldquo;<span class="biz-name">${escape(name)}</span>, in ${escape(city)}. <strong>Open until 9pm today.</strong> Currently offering a 20% lunch special (11am&ndash;2pm). I can place a pickup order, book a reservation, or get you a quote on a custom order right now. Want me to?&rdquo;</p>
+      `;
+    }
+    function escape(s) {
+      return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    }
+    bizGo.addEventListener('click', renderDemo);
+    bizInput.addEventListener('keydown', e => { if (e.key === 'Enter') renderDemo(); });
+    renderDemo();
+
+    // quiz
+    const quiz = document.getElementById('quiz');
+    const quizResult = document.getElementById('quizResult');
+    const quizHeading = document.getElementById('quizHeading');
+    const quizBody = document.getElementById('quizBody');
+    const answers = {};
+
+    quiz.querySelectorAll('.quiz-question').forEach(q => {
+      const qid = q.dataset.q;
+      q.querySelectorAll('.quiz-options button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          q.querySelectorAll('.quiz-options button').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          answers[qid] = btn.dataset.val;
+          maybeShowResult();
+        });
+      });
+    });
+
+    function maybeShowResult() {
+      if (Object.keys(answers).length < 5) return;
+      const yes = Object.values(answers).filter(v => v === 'yes').length;
+      const no = Object.values(answers).filter(v => v === 'no').length;
+      let h, b;
+      if (yes >= 4) {
+        h = 'You&rsquo;re ahead of the curve.';
+        b = 'Most businesses can&rsquo;t answer &ldquo;yes&rdquo; to any of these yet. If you can answer &ldquo;yes&rdquo; to four or five, you&rsquo;re already doing better than 95% of local businesses. Worth making sure the foundation is solid, and that you&rsquo;re visible to <em>all</em> the major AI assistants, not just one.';
+      } else if (yes >= 2) {
+        h = 'You&rsquo;re partially visible.';
+        b = 'You&rsquo;re ahead of most. There are real gaps. Some of your information is reaching AI assistants, some isn&rsquo;t. The fixes from here are quick and worth doing before competitors close the gap.';
+      } else if (no >= 3) {
+        h = 'You&rsquo;re effectively invisible to AI customers.';
+        b = 'This is where almost every business is right now. The fix is easier than you&rsquo;d think, and the businesses that move first in each category are going to have an outsized advantage for the next few years.';
+      } else {
+        h = 'You&rsquo;re not sure, and that&rsquo;s the answer.';
+        b = 'If you can&rsquo;t see whether AI assistants are recommending you, talking about you, or getting your business wrong, you&rsquo;re flying blind. Visibility into what AI is doing on your behalf is the first thing Beacon gives you.';
+      }
+      quizHeading.innerHTML = h;
+      quizBody.innerHTML = b;
+      quizResult.classList.add('show');
+      quizResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // smooth scroll for nav
+    navLinks.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const id = a.dataset.target;
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
