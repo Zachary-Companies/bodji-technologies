@@ -5,3 +5,6 @@ dist/
 .env
 .env.*
 !.env.example
+
+# local agent config
+.claude/

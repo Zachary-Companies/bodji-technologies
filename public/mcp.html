@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Is an MCP? A Plain-English Primer — Bodji Beacon</title>
+  <meta name="description" content="A short, plain-English companion course for business owners: why an AI can't safely use your website, what an MCP endpoint actually is, and how you stay in control of every action — no jargon, no code." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #faf8f3;
+      --color-surface: #ffffff;
+      --color-surface-warm: #fdfaf2;
+      --color-text: #1c1917;
+      --color-text-muted: #57534e;
+      --color-text-subtle: #a8a29e;
+      --color-border: #e7e5e0;
+      --color-border-strong: #d6d3ce;
+      --color-accent: #b45309;
+      --color-accent-hover: #92400e;
+      --color-accent-soft: #fef3c7;
+      --color-accent-ink: #78350f;
+      --color-success: #15803d;
+      --color-success-soft: #dcfce7;
+      --color-danger: #b91c1c;
+      --color-danger-soft: #fee2e2;
+      --color-info: #1d4ed8;
+      --color-info-soft: #dbeafe;
+
+      --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+
+      --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04), 0 1px 3px rgba(28, 25, 23, 0.06);
+      --shadow-md: 0 4px 6px rgba(28, 25, 23, 0.04), 0 10px 20px rgba(28, 25, 23, 0.05);
+      --shadow-lg: 0 12px 24px rgba(28, 25, 23, 0.08), 0 20px 50px rgba(28, 25, 23, 0.06);
+
+      --max-content: 680px;
+      --max-wide: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--color-accent); text-decoration: none; border-bottom: 1px solid currentColor; transition: color .15s; }
+    a:hover { color: var(--color-accent-hover); }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0 0 var(--space-4);
+      color: var(--color-text);
+    }
+
+    h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; }
+    h2 { font-size: clamp(1.6rem, 3.2vw, 2.25rem); }
+    h3 { font-size: 1.3rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.01em; }
+    h4 { font-size: 1rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: 0; text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 0.06em; font-size: 0.8rem; }
+
+    p { margin: 0 0 var(--space-5); color: var(--color-text); }
+    p.lead { font-size: 1.2rem; color: var(--color-text-muted); line-height: 1.55; }
+
+    strong { font-weight: 600; color: var(--color-text); }
+
+    ul, ol { padding-left: var(--space-6); margin: 0 0 var(--space-5); }
+    li { margin-bottom: var(--space-2); }
+
+    /* progress bar */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: transparent; z-index: 100;
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      background: var(--color-accent);
+      transition: width .1s ease-out;
+    }
+
+    /* layout */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      gap: var(--space-16);
+      padding: var(--space-12) var(--space-6);
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; gap: var(--space-8); padding: var(--space-8) var(--space-5); }
+    }
+
+    /* nav */
+    .side-nav {
+      position: sticky;
+      top: var(--space-12);
+      align-self: start;
+      padding-top: var(--space-4);
+    }
+    .back-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: 999px;
+      background: var(--color-surface);
+      margin-bottom: var(--space-6);
+      transition: all 0.18s ease;
+    }
+    .back-pill:hover {
+      color: var(--color-accent-ink);
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+      transform: translateX(-2px);
+    }
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-2);
+      color: var(--color-text);
+    }
+    .nav-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-8);
+      font-weight: 600;
+    }
+    .nav-list { list-style: none; padding: 0; margin: 0; border-left: 1px solid var(--color-border); }
+    .nav-list li { margin: 0; }
+    .nav-list a {
+      display: block;
+      padding: var(--space-2) var(--space-4);
+      font-size: 0.875rem;
+      color: var(--color-text-subtle);
+      border: none;
+      border-left: 2px solid transparent;
+      margin-left: -1px;
+      transition: all .15s;
+      line-height: 1.4;
+    }
+    .nav-list a:hover { color: var(--color-text); }
+    .nav-list a.active { color: var(--color-accent); border-left-color: var(--color-accent); font-weight: 500; }
+    .nav-num { font-variant-numeric: tabular-nums; color: var(--color-text-subtle); margin-right: var(--space-2); font-size: 0.8em; }
+
+    @media (max-width: 900px) {
+      .side-nav { position: static; }
+      .nav-list { display: none; }
+    }
+
+    /* main */
+    main { max-width: var(--max-content); }
+
+    .hero {
+      padding: var(--space-8) 0 var(--space-16);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: var(--space-16);
+    }
+    .hero .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      font-weight: 600;
+      margin-bottom: var(--space-5);
+    }
+    .hero .companion {
+      display: inline-block;
+      margin-top: var(--space-6);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* sections */
+    section.chapter {
+      padding: var(--space-12) 0;
+      scroll-margin-top: var(--space-8);
+    }
+    section.chapter + section.chapter { border-top: 1px solid var(--color-border); }
+
+    .chapter-num {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-4);
+      padding: var(--space-1) var(--space-3);
+      background: var(--color-accent-soft);
+      border-radius: var(--radius-pill);
+      font-weight: 500;
+    }
+
+    blockquote {
+      margin: var(--space-8) 0;
+      padding: var(--space-2) 0 var(--space-2) var(--space-6);
+      border-left: 3px solid var(--color-accent);
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* callout cards */
+    .callout {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      margin: var(--space-8) 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .callout h4 { margin-top: 0; margin-bottom: var(--space-2); }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* segmented control + panel (two doors, industry packs) */
+    .segment {
+      margin: var(--space-8) 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .segment-track {
+      display: flex;
+      gap: var(--space-2);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: var(--space-1);
+      margin-bottom: var(--space-6);
+    }
+    .segment-btn {
+      flex: 1;
+      padding: var(--space-3) var(--space-4);
+      border: none;
+      background: none;
+      border-radius: var(--radius-pill);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all .18s ease;
+    }
+    .segment-btn:hover { color: var(--color-text); }
+    .segment-btn.active { background: var(--color-accent); color: #fff; box-shadow: var(--shadow-sm); }
+    .segment-panel {
+      padding: var(--space-5) var(--space-6);
+      background: var(--color-surface-warm);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      min-height: 132px;
+    }
+    .segment-panel h4 { color: var(--color-text); margin-bottom: var(--space-2); text-transform: none; letter-spacing: 0; font-size: 1.05rem; font-family: var(--font-sans); }
+    .segment-panel p { margin-bottom: var(--space-3); font-size: 0.96rem; color: var(--color-text-muted); }
+    .segment-panel p:last-child { margin-bottom: 0; }
+    .segment-panel .ex { font-size: 0.9rem; color: var(--color-text); background: var(--color-bg); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+    .segment-panel .ex strong { color: var(--color-accent-ink); }
+    .segment-panel ul { margin-bottom: 0; }
+    .segment-panel li { font-size: 0.94rem; color: var(--color-text-muted); }
+    .segment-panel li strong { color: var(--color-text); font-weight: 600; }
+
+    /* control demo (the rulebook) */
+    .control {
+      margin: var(--space-8) 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .control-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+    .control-row:last-of-type { border-bottom: none; }
+    .control-row .cap { font-weight: 500; color: var(--color-text); font-size: 0.98rem; }
+    .control-seg { display: inline-flex; border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); overflow: hidden; }
+    .control-seg button {
+      padding: var(--space-2) var(--space-3);
+      border: none;
+      background: var(--color-bg);
+      color: var(--color-text-muted);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      border-left: 1px solid var(--color-border-strong);
+    }
+    .control-seg button:first-child { border-left: none; }
+    .control-seg button.on[data-level="auto"] { background: var(--color-success-soft); color: var(--color-success); }
+    .control-seg button.on[data-level="draft"] { background: var(--color-info-soft); color: var(--color-info); }
+    .control-seg button.on[data-level="never"] { background: var(--color-danger-soft); color: var(--color-danger); }
+    .control-summary {
+      margin-top: var(--space-6);
+      padding: var(--space-5) var(--space-6);
+      background: var(--color-accent-soft);
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-serif);
+      font-size: 1.08rem;
+      line-height: 1.5;
+      color: var(--color-accent-ink);
+    }
+    .control-summary strong { color: var(--color-accent-ink); font-weight: 600; }
+    .control-note { margin-top: var(--space-4); font-size: 0.85rem; color: var(--color-text-subtle); }
+
+    /* demo / before-after */
+    .demo {
+      margin: var(--space-8) 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .demo-input {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+    }
+    .demo-input input {
+      flex: 1;
+      min-width: 200px;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border .15s;
+    }
+    .demo-input input:focus { outline: none; border-color: var(--color-accent); }
+    .demo-input button {
+      padding: var(--space-3) var(--space-5);
+      background: var(--color-text);
+      color: var(--color-bg);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .demo-input button:hover { background: var(--color-accent); }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+    @media (max-width: 700px) {
+      .demo-grid { grid-template-columns: 1fr; }
+    }
+
+    .demo-card {
+      padding: var(--space-5);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+    }
+    .demo-card.noise { background: var(--color-danger-soft); border-color: #fecaca; }
+    .demo-card.clean { background: var(--color-success-soft); border-color: #bbf7d0; }
+    .demo-card h4 {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+      text-transform: uppercase;
+    }
+    .demo-card.noise h4 { color: var(--color-danger); }
+    .demo-card.clean h4 { color: var(--color-success); }
+    .demo-card .ai-response {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      font-family: var(--font-sans);
+    }
+    .demo-card .code-noise {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      line-height: 1.5;
+      color: #9a3a3a;
+      white-space: pre-wrap;
+      word-break: break-word;
+      opacity: 0.85;
+    }
+    .demo-card .verdict { margin-top: auto; padding-top: var(--space-3); font-size: 0.86rem; font-style: italic; color: var(--color-text-muted); }
+    .demo-card.noise .verdict { color: var(--color-danger); }
+    .demo-card .field { display: block; font-family: var(--font-mono); font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 2px; }
+    .demo-card .field b { color: var(--color-success); font-weight: 600; }
+
+    /* host mock (renders inside an AI app) */
+    .host-mock {
+      margin: var(--space-8) 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .host-bar {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-surface-warm);
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.78rem; color: var(--color-text-subtle); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .host-body { padding: var(--space-5) var(--space-6); }
+    .bubble-user { font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+    .bubble-user::before { content: 'Customer'; display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 4px; font-weight: 600; }
+    .mock-card {
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-bg);
+    }
+    .mock-card .mc-tag { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-accent); font-weight: 600; margin-bottom: var(--space-2); }
+    .mock-card .mc-title { font-weight: 600; margin-bottom: var(--space-1); }
+    .mock-card .mc-sub { font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+    .mock-card .mc-btn { display: inline-block; padding: var(--space-2) var(--space-5); background: var(--color-accent); color: #fff; border-radius: var(--radius-sm); font-size: 0.88rem; font-weight: 600; }
+    .mock-note { font-size: 0.82rem; color: var(--color-text-subtle); margin-top: var(--space-3); }
+
+    /* myths accordion */
+    .accordion { margin: var(--space-8) 0; }
+    .accordion details {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-3);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .accordion summary {
+      cursor: pointer;
+      list-style: none;
+      padding: var(--space-5) var(--space-6);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .accordion summary::-webkit-details-marker { display: none; }
+    .accordion summary::after {
+      content: '+';
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--color-accent);
+      transition: transform .2s;
+      line-height: 1;
+    }
+    .accordion details[open] summary::after { content: '\2013'; }
+    .accordion summary:hover { color: var(--color-accent-ink); }
+    .accordion .answer { padding: 0 var(--space-6) var(--space-6); }
+    .accordion .answer p { margin-bottom: 0; color: var(--color-text-muted); }
+
+    /* self-assessment */
+    .quiz {
+      margin: var(--space-8) 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-md);
+    }
+    .quiz h3 { margin-top: 0; }
+    .quiz-question {
+      padding: var(--space-5) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .quiz-question:last-of-type { border-bottom: none; }
+    .quiz-question p { margin-bottom: var(--space-3); font-weight: 500; }
+    .quiz-options { display: flex; gap: var(--space-3); }
+    .quiz-options button {
+      flex: 1;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-bg);
+      color: var(--color-text-muted);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all .15s;
+      font-weight: 500;
+    }
+    .quiz-options button:hover { border-color: var(--color-accent); color: var(--color-text); }
+    .quiz-options button.selected[data-val="yes"] { background: var(--color-success-soft); border-color: var(--color-success); color: var(--color-success); }
+    .quiz-options button.selected[data-val="no"] { background: var(--color-danger-soft); border-color: var(--color-danger); color: var(--color-danger); }
+    .quiz-options button.selected[data-val="unsure"] { background: var(--color-info-soft); border-color: var(--color-info); color: var(--color-info); }
+
+    .quiz-result {
+      margin-top: var(--space-6);
+      padding: var(--space-6);
+      background: var(--color-accent-soft);
+      border-radius: var(--radius-sm);
+      border: 1px solid #fde68a;
+      display: none;
+    }
+    .quiz-result.show { display: block; }
+    .quiz-result h4 {
+      color: var(--color-accent-ink);
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      text-transform: none;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-2);
+    }
+    .quiz-result p { margin-bottom: 0; color: var(--color-accent-ink); }
+
+    /* CTA */
+    .cta {
+      margin: var(--space-16) 0 var(--space-8);
+      padding: var(--space-10);
+      background: var(--color-text);
+      color: var(--color-bg);
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+    .cta h3 {
+      color: var(--color-bg);
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      text-transform: none;
+      margin-bottom: var(--space-4);
+    }
+    .cta p { color: rgba(250, 248, 243, 0.75); margin-bottom: var(--space-6); }
+    .cta-actions { display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap; }
+    .cta a {
+      display: inline-block;
+      padding: var(--space-3) var(--space-6);
+      background: var(--color-accent);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: none;
+      transition: background .15s;
+    }
+    .cta a:hover { background: var(--color-accent-hover); color: white; }
+    .cta a.secondary {
+      background: transparent;
+      color: var(--color-bg);
+      border: 1px solid rgba(250, 248, 243, 0.3);
+    }
+    .cta a.secondary:hover { border-color: var(--color-bg); background: rgba(250, 248, 243, 0.05); }
+
+    /* footer */
+    footer {
+      padding: var(--space-12) 0 var(--space-8);
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--space-8);
+      color: var(--color-text-subtle);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    /* small touches */
+    .pill {
+      display: inline-block;
+      padding: 2px 10px;
+      background: var(--color-accent-soft);
+      color: var(--color-accent-ink);
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .pill.cool { background: var(--color-info-soft); color: var(--color-info); }
+    .pill.warn { background: var(--color-danger-soft); color: var(--color-danger); }
+
+    .fade-in { opacity: 0; transform: translateY(8px); transition: opacity .5s, transform .5s; }
+    .fade-in.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Course chapters">
+      <a href="/" class="back-pill">&larr;&nbsp; Back to main site</a>
+      <a href="/" class="nav-brand" style="text-decoration: none; color: inherit; display: block;">Bodji Beacon</a>
+      <div class="nav-tag">A companion primer</div>
+      <ol class="nav-list">
+        <li><a href="#ch1" data-target="ch1"><span class="nav-num">01</span>The three letters</a></li>
+        <li><a href="#ch2" data-target="ch2"><span class="nav-num">02</span>Why an AI can&rsquo;t use your website</a></li>
+        <li><a href="#ch3" data-target="ch3"><span class="nav-num">03</span>So what <em>is</em> an MCP?</a></li>
+        <li><a href="#ch4" data-target="ch4"><span class="nav-num">04</span>Two doors: read and act</a></li>
+        <li><a href="#ch5" data-target="ch5"><span class="nav-num">05</span>You set the rules</a></li>
+        <li><a href="#ch6" data-target="ch6"><span class="nav-num">06</span>It works inside the AI apps</a></li>
+        <li><a href="#ch7" data-target="ch7"><span class="nav-num">07</span>Built around your business</a></li>
+        <li><a href="#ch8" data-target="ch8"><span class="nav-num">08</span>Are you set up?</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <header class="hero">
+        <div class="eyebrow">MCP, in plain English</div>
+        <h1>You keep hearing &ldquo;MCP.&rdquo; Here&rsquo;s what it actually is, and why your website can&rsquo;t do its job.</h1>
+        <p class="lead">As you get your business ready for AI, you keep running into three letters nobody explains: <strong>MCP</strong>. This short companion course explains why an AI assistant can&rsquo;t safely use the website you already have, what an MCP gives it instead, and how you stay in control of every action it takes, with no code and no jargon.</p>
+        <span class="companion">New here? Start with the <a href="/course.html">7-minute AI visibility primer</a>, then come back for this one.</span>
+      </header>
+
+      <section class="chapter" id="ch1">
+        <span class="chapter-num">CHAPTER 01</span>
+        <h2>The three letters nobody explains.</h2>
+        <p>Every article about getting your business ready for AI eventually drops the same three letters: <strong>MCP</strong>. Then it moves on, as if you already knew. Most owners nod along and quietly hope it doesn&rsquo;t matter. It does, and it&rsquo;s simpler than it sounds.</p>
+        <blockquote>An MCP is how an AI assistant safely reads your business and does things for your customers, without guessing, and without ever stepping outside the rules you set.</blockquote>
+        <p>To see why it matters, you have to start with an uncomfortable fact: <strong>the website you already paid for can&rsquo;t do this job.</strong> Not because it&rsquo;s a bad website, but because it was built for people, not for machines. That&rsquo;s the next chapter, and it&rsquo;s the whole reason MCP exists.</p>
+      </section>
+
+      <section class="chapter" id="ch2">
+        <span class="chapter-num">CHAPTER 02</span>
+        <h2>Why an AI can&rsquo;t actually use your website.</h2>
+        <p>Your website looks clean to you because your eyes do an enormous amount of work without you noticing. You skip the cookie banner, ignore the menu, scroll past the hero image, and land on the one line you wanted. An AI assistant can&rsquo;t do that. It receives the <em>whole page as code</em>, and has to fight through all of it.</p>
+        <p>Behind that tidy page is a pile of markup, scripts, tracking tags, pop-ups, navigation, and styling, none of which means anything to a customer&rsquo;s question. The AI has to wade through that noise and <strong>guess</strong> which scrap is your real answer. Type a business name to see what it&rsquo;s actually up against:</p>
+
+        <div class="demo">
+          <div class="demo-input">
+            <input id="bizInput" type="text" placeholder="e.g. Joe's Pizza, Minneapolis" value="Joe's Pizza, Minneapolis" />
+            <button id="bizGo">See the difference</button>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card noise">
+              <h4>What an AI wades through on your site</h4>
+              <div class="code-noise" id="aiNoise"></div>
+              <div class="verdict" id="aiNoiseVerdict"></div>
+            </div>
+            <div class="demo-card clean">
+              <h4>What it reads from your MCP</h4>
+              <div class="ai-response" id="aiClean"></div>
+            </div>
+          </div>
+        </div>
+
+        <p>But the deeper problem isn&rsquo;t reading, it&rsquo;s <strong>acting</strong>. Even if the AI guesses your hours right, there is no safe way for it to <em>do</em> anything on a web page it&rsquo;s only half-understanding. It can&rsquo;t be trusted to fill in and submit your booking form, or send a quote request, because it doesn&rsquo;t know your rules and nobody ever told it what it&rsquo;s allowed to do. So it does the safe thing: nothing. It gives a vague answer and tells the customer to call you, and the customer moves on.</p>
+
+        <div class="callout">
+          <h4>A website is a poster. An AI needs a service counter.</h4>
+          <p>A poster is for a person to stand back and read. A service counter is where a request gets handled, by someone who knows the rules and is allowed to act. Your website is the poster. An MCP is the counter, and almost no business has one yet.</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="ch3">
+        <span class="chapter-num">CHAPTER 03</span>
+        <h2>So what <em>is</em> an MCP?</h2>
+        <p><span class="pill cool">MCP</span> &nbsp;<strong>Model Context Protocol.</strong> The word <em>protocol</em> just means &ldquo;an agreed-upon standard,&rdquo; like a wall outlet that any device can plug into. MCP is the standard shape that lets <strong>any</strong> AI assistant, ChatGPT, Claude, Gemini, and the rest, plug into your business and work with it directly.</p>
+        <p>For your purposes, an MCP gives an AI two things your website never could:</p>
+        <ul>
+          <li><strong>A clean, structured version of your business it can read directly</strong>, your services, prices, hours, and current deals as plain labeled facts, with none of the page code to fight through.</li>
+          <li><strong>A controlled counter where it can take the actions you&rsquo;ve approved</strong>, booking, quoting, taking an order, answering a question, and nothing else.</li>
+        </ul>
+
+        <div class="callout">
+          <h4>What an MCP is <em>not</em>.</h4>
+          <p>It is not a chatbot bolted onto your site, not a directory listing, and not &ldquo;your website with extra steps.&rdquo; It&rsquo;s a separate, machine-readable doorway with rules built in. Your website stays exactly as it is, for the humans; the MCP works alongside it, for the AI.</p>
+        </div>
+
+        <p>And you don&rsquo;t build it. A service like Bodji Beacon reads your existing website once, pulls out the real facts, checks them, and compiles them into that clean doorway, then keeps it current and under your control. Your job is to decide the rules, which is the next two chapters.</p>
+      </section>
+
+      <section class="chapter" id="ch4">
+        <span class="chapter-num">CHAPTER 04</span>
+        <h2>Two doors: one to read, one to act.</h2>
+        <p>This is the part that makes an MCP <em>safe</em>. It isn&rsquo;t one open door, it&rsquo;s two, and they&rsquo;re very different. Click each one.</p>
+
+        <div class="segment" id="doorSegment">
+          <div class="segment-track" id="doorTrack">
+            <button class="segment-btn active" data-door="read">The read door</button>
+            <button class="segment-btn" data-door="act">The action door</button>
+          </div>
+          <div class="segment-panel" id="doorPanel"><!-- filled by JS --></div>
+        </div>
+
+        <p>The read door is open to the world, because reading your hours can&rsquo;t hurt anyone. The action door is locked by default, and only opens for an AI you&rsquo;ve specifically authorized, to do the specific things you&rsquo;ve allowed. That separation is the whole reason an AI can be useful to your customers without being a risk to your business.</p>
+      </section>
+
+      <section class="chapter" id="ch5">
+        <span class="chapter-num">CHAPTER 05</span>
+        <h2>You set the rules, and everything is logged.</h2>
+        <p>Here&rsquo;s the action door up close. For every kind of thing an AI might do, <strong>you</strong> set how far it can go on its own. Try it, set a level for each and watch your rulebook write itself.</p>
+
+        <div class="control" id="control">
+          <div class="control-row" data-cap="Answer questions about my business">
+            <span class="cap">Answer questions about my business</span>
+            <span class="control-seg" data-default="auto">
+              <button data-level="auto">On its own</button>
+              <button data-level="draft">Draft for me</button>
+              <button data-level="never">Never</button>
+            </span>
+          </div>
+          <div class="control-row" data-cap="Book appointments &amp; tables">
+            <span class="cap">Book appointments &amp; tables</span>
+            <span class="control-seg" data-default="auto">
+              <button data-level="auto">On its own</button>
+              <button data-level="draft">Draft for me</button>
+              <button data-level="never">Never</button>
+            </span>
+          </div>
+          <div class="control-row" data-cap="Send price quotes">
+            <span class="cap">Send price quotes</span>
+            <span class="control-seg" data-default="draft">
+              <button data-level="auto">On its own</button>
+              <button data-level="draft">Draft for me</button>
+              <button data-level="never">Never</button>
+            </span>
+          </div>
+          <div class="control-row" data-cap="Commit to jobs over $500">
+            <span class="cap">Commit to jobs over $500</span>
+            <span class="control-seg" data-default="never">
+              <button data-level="auto">On its own</button>
+              <button data-level="draft">Draft for me</button>
+              <button data-level="never">Never</button>
+            </span>
+          </div>
+          <div class="control-summary" id="controlSummary"><!-- filled by JS --></div>
+          <p class="control-note">Behind the scenes, every action an AI requests is checked against these rules <em>before</em> it happens, and only runs if the agent is authorized, the action is allowed, and it&rsquo;s within the limit you set. Each one is written to a log you can review.</p>
+        </div>
+
+        <div class="callout">
+          <h4>&ldquo;Draft for me&rdquo; is the setting most owners live in.</h4>
+          <p>It&rsquo;s the middle gear: the AI does the work, you tap approve. You can change any of these in minutes and the AI follows the new rules immediately, no developer, no website rebuild, no waiting. The dial goes from &ldquo;hands off&rdquo; to &ldquo;fully helpful,&rdquo; and you hold it.</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="ch6">
+        <span class="chapter-num">CHAPTER 06</span>
+        <h2>It shows up <em>inside</em> the apps your customers already use.</h2>
+        <p>Here&rsquo;s the part that surprises people. With an MCP, your business doesn&rsquo;t just answer questions in an AI app, it can <strong>appear inside it</strong>, as something the customer can act on, without ever opening your website.</p>
+
+        <div class="host-mock">
+          <div class="host-bar">Inside the customer&rsquo;s AI assistant</div>
+          <div class="host-body">
+            <div class="bubble-user">&ldquo;Any lunch deals near me right now?&rdquo;</div>
+            <div class="mock-card">
+              <div class="mc-tag">From your Beacon</div>
+              <div class="mc-title">20% off lunch &middot; 11am&ndash;2pm today</div>
+              <div class="mc-sub">Dine-in or pickup. Tap to claim and reserve a table.</div>
+              <span class="mc-btn">Claim &amp; book &rarr;</span>
+            </div>
+            <div class="mock-note">A live, working card, rendered right in the chat. The customer claims and books without leaving the assistant.</div>
+          </div>
+        </div>
+
+        <p>That deal card, a booking widget, a menu, a quote builder, these are real components that render inside Claude, ChatGPT, and Bodji&rsquo;s own consumer app. <strong>Bodji builds and security-reviews every component;</strong> you just pick one and fill in the details. There&rsquo;s no code for you to write and nothing for a customer to download. Your storefront simply appears where your customers already are.</p>
+      </section>
+
+      <section class="chapter" id="ch7">
+        <span class="chapter-num">CHAPTER 07</span>
+        <h2>It&rsquo;s built around your business, not a generic listing.</h2>
+        <p>An MCP isn&rsquo;t one-size-fits-all. The doorway, the components, and the rules are shaped to how your business actually works. Pick one to see.</p>
+
+        <div class="segment" id="packSegment">
+          <div class="segment-track" id="packTrack">
+            <button class="segment-btn active" data-pack="restaurant">Restaurant</button>
+            <button class="segment-btn" data-pack="hvac">Home services</button>
+            <button class="segment-btn" data-pack="salon">Salon</button>
+          </div>
+          <div class="segment-panel" id="packPanel"><!-- filled by JS --></div>
+        </div>
+
+        <p>And it plugs into more than the basics. An MCP can connect to the tools you already run, your calendar, your CRM, your payment system, so a booking the AI takes lands where it belongs. It carries a <strong>verified trust record</strong> (Bodji Signal) that gives an assistant a reason to recommend you over a business it knows nothing about. And if you <em>buy</em> from vendors, you can post a need as a structured request and have vendor AIs send back comparable proposals you approve, on your terms.</p>
+      </section>
+
+      <section class="chapter" id="ch8">
+        <span class="chapter-num">CHAPTER 08</span>
+        <h2>Could an AI actually work with your business today? 4 questions.</h2>
+        <p>Answer honestly. It takes about a minute.</p>
+
+        <div class="quiz" id="quiz">
+          <div class="quiz-question" data-q="1">
+            <p>1. If an AI assistant tried to use your website right now, could it cleanly read your real services and prices, or would it be guessing through page code?</p>
+            <div class="quiz-options">
+              <button data-val="yes">It could read cleanly</button>
+              <button data-val="no">It&rsquo;d be guessing</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="2">
+            <p>2. Is there a safe way for an AI to actually <em>do</em> something for a customer, book, quote, take an order, not just read about you?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="3">
+            <p>3. Have you decided which actions an AI may take on its own, and which need your approval or are off-limits?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="4">
+            <p>4. Can your business show up <em>inside</em> the AI apps your customers already use, not just on your own website?</p>
+            <div class="quiz-options">
+              <button data-val="yes">Yes</button>
+              <button data-val="no">No</button>
+              <button data-val="unsure">Not sure</button>
+            </div>
+          </div>
+
+          <div class="quiz-result" id="quizResult">
+            <h4 id="quizHeading"></h4>
+            <p id="quizBody"></p>
+          </div>
+        </div>
+
+        <p>If you answered &ldquo;no&rdquo; or &ldquo;not sure&rdquo; to most of these, you&rsquo;re in good company, almost no business has an MCP yet. That&rsquo;s the opportunity. And the fix doesn&rsquo;t require a developer, a new website, or any technical work on your part.</p>
+
+        <div class="cta">
+          <h3>Bodji Beacon is your business&rsquo;s MCP, done for you.</h3>
+          <p>We build the clean, AI-readable doorway from the website you already have, wire up the controlled action layer with your rules, and let your storefront show up right inside the AI apps your customers use, while you stay in charge of everything. See a 5-minute demo.</p>
+          <div class="cta-actions">
+            <a href="/">Schedule a meeting</a>
+            <a href="https://signal.beacon.zacharycompanies.ai/reports/cedar-table-cafe" class="secondary">See a real example</a>
+          </div>
+        </div>
+
+        <footer>
+          <p>Bodji Beacon &middot; Built by Zachary Companies &middot; Questions? <a href="mailto:hello@beacon.zacharycompanies.ai">hello@beacon.zacharycompanies.ai</a></p>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Redirect back-to-landing links to the section the visitor came from.
+    // Triggered by /mcp?return=<anchor>. Safely sanitized to letters,
+    // numbers, dashes, and underscores.
+    (function rewireReturnTo() {
+      const returnParam = new URLSearchParams(window.location.search).get('return');
+      if (!returnParam || !/^[a-zA-Z0-9_-]+$/.test(returnParam)) return;
+      const target = '/#' + returnParam;
+      document.querySelectorAll('.back-pill, .nav-brand').forEach((el) => {
+        el.setAttribute('href', target);
+      });
+    })();
+
+    // progress bar
+    const progressFill = document.getElementById('progressFill');
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressFill.style.width = pct + '%';
+    });
+
+    // active section in nav
+    const navLinks = document.querySelectorAll('.nav-list a');
+    const sections = document.querySelectorAll('section.chapter');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          navLinks.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(s => observer.observe(s));
+
+    // fade-in animation for chapters
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          fadeObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(s => { s.classList.add('fade-in'); fadeObserver.observe(s); });
+
+    function escape(s) {
+      return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    }
+
+    // demo: code noise (website) vs clean fields (MCP)
+    const bizInput = document.getElementById('bizInput');
+    const bizGo = document.getElementById('bizGo');
+    const aiNoise = document.getElementById('aiNoise');
+    const aiNoiseVerdict = document.getElementById('aiNoiseVerdict');
+    const aiClean = document.getElementById('aiClean');
+
+    function renderDemo() {
+      const raw = bizInput.value.trim() || "Joe's Pizza, Minneapolis";
+      const name = raw.split(',')[0].trim();
+      const city = (raw.split(',')[1] || 'your area').trim();
+
+      // A small illustration of the markup soup an AI actually receives.
+      const noise =
+`<div class="nav__wrap" data-sticky>
+  <button aria-label="menu">&#9776;</button> ...
+<div id="cookie-consent" class="banner">
+  We use cookies <a>Accept all</a></div>
+<section class="hero" style="bg:url(...)">
+  <h1>Welcome to ${escape(name)}!</h1>
+<!-- hours: see our Facebook page -->
+<script src="/analytics.js"><\/script>
+  ... 1,400 more lines ...`;
+      aiNoise.textContent = noise;
+      aiNoiseVerdict.textContent = 'Somewhere in here are your hours. The AI has to guess, and it cannot safely click anything.';
+
+      aiClean.innerHTML = `
+        <p><span class="field">name: <b>${escape(name)}</b></span>
+        <span class="field">city: <b>${escape(city)}</b></span>
+        <span class="field">open_now: <b>yes &mdash; until 9pm</b></span>
+        <span class="field">services: <b>dine-in, pickup, catering</b></span>
+        <span class="field">can_do: <b>book, order, quote</b></span></p>
+        <p style="margin-bottom:0; font-size:0.88rem; color:var(--color-text-muted);">Plain, labeled facts &mdash; and a safe set of actions. The AI can answer <em>and act</em>.</p>
+      `;
+    }
+    bizGo.addEventListener('click', renderDemo);
+    bizInput.addEventListener('keydown', e => { if (e.key === 'Enter') renderDemo(); });
+    renderDemo();
+
+    // two doors (read / act)
+    const doors = {
+      read: {
+        title: 'The read door &mdash; open to any AI',
+        body: `<p>Public, safe, and read-only. Any assistant can look these up the moment a customer asks, no permission needed, because reading can&rsquo;t hurt anyone.</p>
+               <div class="ex"><strong>What&rsquo;s behind it:</strong> your profile, hours, services, prices, current deals, and how to get in touch &mdash; clean and current.</div>`
+      },
+      act: {
+        title: 'The action door &mdash; locked by default',
+        body: `<p>Anything that <em>changes</em> something lives here, and it stays locked until you open it, for a specific AI, to do specific things, within limits you set.</p>
+               <div class="ex"><strong>What&rsquo;s behind it:</strong> booking, taking an order, sending a quote, submitting or answering a proposal &mdash; each one checked against your rules before it runs.</div>`
+      }
+    };
+    const doorPanel = document.getElementById('doorPanel');
+    const doorBtns = document.querySelectorAll('#doorTrack .segment-btn');
+    function setDoor(name) {
+      doorBtns.forEach(b => b.classList.toggle('active', b.dataset.door === name));
+      const d = doors[name];
+      doorPanel.innerHTML = `<h4>${d.title}</h4>${d.body}`;
+    }
+    doorBtns.forEach(b => b.addEventListener('click', () => setDoor(b.dataset.door)));
+    setDoor('read');
+
+    // control demo (the rulebook)
+    const controlRows = document.querySelectorAll('#control .control-row');
+    const controlSummary = document.getElementById('controlSummary');
+    const levelState = {};
+
+    const phrasing = {
+      'Answer questions about my business': {
+        auto: 'answer customer questions on its own',
+        draft: 'draft answers for you to approve',
+        never: 'never answer for you'
+      },
+      'Book appointments & tables': {
+        auto: 'book appointments and tables automatically',
+        draft: 'draft bookings for you to confirm',
+        never: 'never book anything'
+      },
+      'Send price quotes': {
+        auto: 'send price quotes on its own',
+        draft: 'draft quotes for your approval',
+        never: 'never send a quote'
+      },
+      'Commit to jobs over $500': {
+        auto: 'commit to jobs over $500 on its own',
+        draft: 'ask you before committing to jobs over $500',
+        never: 'never commit to a job over $500 without your say-so'
+      }
+    };
+
+    function renderSummary() {
+      const parts = Array.from(controlRows).map(row => phrasing[row.dataset.cap][levelState[row.dataset.cap]]);
+      const joined = parts.length > 1
+        ? parts.slice(0, -1).join('; ') + '; and it will ' + parts[parts.length - 1]
+        : parts[0];
+      controlSummary.innerHTML = `<strong>Your rulebook:</strong> the AI may ${joined}.`;
+    }
+
+    controlRows.forEach(row => {
+      const cap = row.dataset.cap;
+      const seg = row.querySelector('.control-seg');
+      const def = seg.dataset.default;
+      levelState[cap] = def;
+      seg.querySelectorAll('button').forEach(btn => {
+        btn.classList.toggle('on', btn.dataset.level === def);
+        btn.addEventListener('click', () => {
+          seg.querySelectorAll('button').forEach(b => b.classList.remove('on'));
+          btn.classList.add('on');
+          levelState[cap] = btn.dataset.level;
+          renderSummary();
+        });
+      });
+    });
+    renderSummary();
+
+    // industry packs
+    const packs = {
+      restaurant: {
+        title: 'Restaurant',
+        body: `<p>Your doorway is shaped for a place people eat at, and it shows up ready to act.</p>
+               <ul>
+                 <li><strong>Components:</strong> menu, lunch &amp; happy-hour deals, table booking, a waitlist for busy nights.</li>
+                 <li><strong>Connects to:</strong> your reservation calendar, so a booking the AI takes is really held.</li>
+                 <li><strong>Answers it owns:</strong> &ldquo;Do you have gluten-free?&rdquo; &ldquo;Is the patio open?&rdquo; &mdash; the way you&rsquo;d answer.</li>
+               </ul>`
+      },
+      hvac: {
+        title: 'Home services',
+        body: `<p>Built for quote-and-schedule work, where the money is in getting the lead booked.</p>
+               <ul>
+                 <li><strong>Components:</strong> instant-estimate calculator, quote request builder, service-area checker, appointment scheduler.</li>
+                 <li><strong>Connects to:</strong> your CRM and calendar, so leads and jobs land where your team already works.</li>
+                 <li><strong>Rules that matter:</strong> small jobs booked on their own; anything over your limit drafted for your approval.</li>
+               </ul>`
+      },
+      salon: {
+        title: 'Salon',
+        body: `<p>Tuned for an appointment book, where a filled chair is the whole game.</p>
+               <ul>
+                 <li><strong>Components:</strong> service menu with pricing, stylist booking, deals, a rebooking nudge.</li>
+                 <li><strong>Connects to:</strong> your scheduling system, so the AI only offers slots you actually have.</li>
+                 <li><strong>Answers it owns:</strong> &ldquo;How long for a cut and color?&rdquo; &ldquo;Do you take walk-ins?&rdquo;</li>
+               </ul>`
+      }
+    };
+    const packPanel = document.getElementById('packPanel');
+    const packBtns = document.querySelectorAll('#packTrack .segment-btn');
+    function setPack(name) {
+      packBtns.forEach(b => b.classList.toggle('active', b.dataset.pack === name));
+      const p = packs[name];
+      packPanel.innerHTML = `<h4>${p.title}</h4>${p.body}`;
+    }
+    packBtns.forEach(b => b.addEventListener('click', () => setPack(b.dataset.pack)));
+    setPack('restaurant');
+
+    // quiz
+    const quiz = document.getElementById('quiz');
+    const quizResult = document.getElementById('quizResult');
+    const quizHeading = document.getElementById('quizHeading');
+    const quizBody = document.getElementById('quizBody');
+    const answers = {};
+
+    quiz.querySelectorAll('.quiz-question').forEach(q => {
+      const qid = q.dataset.q;
+      q.querySelectorAll('.quiz-options button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          q.querySelectorAll('.quiz-options button').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          answers[qid] = btn.dataset.val;
+          maybeShowResult();
+        });
+      });
+    });
+
+    function maybeShowResult() {
+      if (Object.keys(answers).length < 4) return;
+      const yes = Object.values(answers).filter(v => v === 'yes').length;
+      const no = Object.values(answers).filter(v => v === 'no').length;
+      let h, b;
+      if (yes >= 3) {
+        h = 'You&rsquo;ve built the counter, not just the poster.';
+        b = 'You&rsquo;re well ahead of the field, most businesses can only be <em>read</em> (badly), let alone acted on. Worth confirming your rules are set the way you want and that every major AI assistant can reach you, not just one.';
+      } else if (yes >= 1) {
+        h = 'An AI can see you, but it can&rsquo;t really work with you.';
+        b = 'Some of the pieces are there, but an AI still can&rsquo;t read you cleanly or act with confidence. Closing that gap is quick, and worth doing before competitors in your category put their counter up first.';
+      } else if (no >= 2) {
+        h = 'Right now an AI is guessing about you, and can&rsquo;t act at all.';
+        b = 'This is where nearly every business is today: a website an AI has to squint at, and no safe way for it to do anything. The fix is easier than you&rsquo;d expect, and moving first in your category is an outsized advantage.';
+      } else {
+        h = 'You&rsquo;re not sure, which is its own answer.';
+        b = 'If you can&rsquo;t say what an AI can read or do for your business, then nobody has set those rules, which means the AI is improvising or skipping you. An MCP is how you take the wheel.';
+      }
+      quizHeading.innerHTML = h;
+      quizBody.innerHTML = b;
+      quizResult.classList.add('show');
+      quizResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // smooth scroll for nav
+    navLinks.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const id = a.dataset.target;
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

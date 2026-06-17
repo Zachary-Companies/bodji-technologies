@@ -38,6 +38,7 @@ export function Footer() {
         <div className="footer-links" aria-label="Footer links">
           <a href={LINKS.checker}>AI Visibility Checker</a>
           <a href={LINKS.course}>AI visibility mini-course</a>
+          <a href={LINKS.mcpPrimer}>What is an MCP?</a>
           <a href={LINKS.contact}>Contact</a>
         </div>
       </ScrollReveal>
