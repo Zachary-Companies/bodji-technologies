@@ -32,14 +32,34 @@ npm run lint
 npm run build
 ```
 
-## Deploy
+## Deployment state
 
-The site deploys through GitHub Pages using `.github/workflows/deploy-pages.yml`.
+The repository contains a Vite-to-Pages workflow at
+`.github/workflows/deploy-pages.yml`, but the GitHub Pages repository setting is
+currently configured for the legacy `main:/` source instead of GitHub Actions.
+The workflow is deliberately **manual-only** (`workflow_dispatch`) while the site
+is inactive, so ordinary source pushes do not attempt a production deployment.
 
-**A push to `main` automatically rebuilds and redeploys this legacy site.** Do
-not treat repository-only cleanup as deployment-neutral.
+Before this cleanup, a push to `main` triggered both behaviors:
 
-The workflow builds `dist/` and deploys that artifact. GitHub Pages should use the GitHub Actions Pages source, not the raw repo root.
+- The Vite workflow had been failing during `npm ci` because the lockfile
+  referenced a private CodeArtifact registry without runner authentication.
+  All dependencies are public, so the lockfile is now pinned to
+  `registry.npmjs.org`; a clean unauthenticated install and build pass.
+- The legacy Pages setting still publishes the raw repository root on pushes.
+  The
+  public page consequently serves the uncompiled Vite entry point
+  (`/src/main.tsx`) instead of the `dist/` application.
+
+The custom domain also failed HTTPS certificate validation when checked because
+the served certificate did not match `bodjitechnologies.com`. The site should be
+treated as an unhealthy legacy deployment until someone deliberately repairs
+the Pages source setting and certificate configuration. The Pages setting needs
+to be changed from legacy `main:/` to GitHub Actions by a repository administrator.
+
+No deployment repair is performed by this repository cleanup. When the site is
+needed again, follow
+[`docs/deployment/github-pages-repair.md`](docs/deployment/github-pages-repair.md).
 
 Production domain:
 
@@ -54,26 +74,21 @@ Required public build files are in `public/`:
 - `robots.txt`
 - `sitemap.xml`
 
-An older, secondary AWS deployment path is documented in
-[`docs/deployment/aws.md`](docs/deployment/aws.md). GitHub Pages is the configured
-automatic path.
-
-When checked on 2026-07-23, the custom domain resolved to GitHub Pages and
-returned content, but HTTPS certificate validation failed because the served
-certificate did not match `bodjitechnologies.com`. Recheck the Pages custom-domain
-configuration before treating the public endpoint as healthy.
+A secondary manual AWS deployment path is documented in
+[`docs/deployment/aws.md`](docs/deployment/aws.md).
 
 ## Repository map
 
 | Area | Purpose |
 | --- | --- |
 | `src/`, `public/` | Canonical build inputs for the legacy site. |
-| `docs/deployment/` | Deployment documentation. |
+| `docs/deployment/` | GitHub Pages repair runbook and the secondary AWS deployment reference. |
 | `docs/archive/` | Historical PRDs, plans, audits, and messaging notes. |
 | `design/archive/google-studio/` | Preserved alternate Google AI Studio implementation; not a build input. |
 
-Duplicate root copies of `CNAME`, `robots.txt`, and `sitemap.xml` were removed;
-the deployed canonical copies remain in `public/`.
+`CNAME`, `robots.txt`, and `sitemap.xml` remain at both the repository root and
+in `public/` while the legacy Pages source and intended Vite artifact deployment
+coexist. Remove the root copies only after switching Pages to GitHub Actions.
 
 ## External Tools
 
