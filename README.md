@@ -6,6 +6,10 @@
 > live in the sibling `bodji-frontend` repository. Treat this site as
 > maintenance-only unless it is deliberately revived.
 
+The repository root currently serves a self-contained temporary “Coming Soon”
+page. The full React application remains in `src/`, and its original Vite entry
+shell is preserved at `src/full-site-index.template.html` for a future revival.
+
 Vite + React + TypeScript frontend for `bodjitechnologies.com`.
 
 The site presents Bodji Technologies as the umbrella for:
@@ -46,10 +50,9 @@ Before this cleanup, a push to `main` triggered both behaviors:
   referenced a private CodeArtifact registry without runner authentication.
   All dependencies are public, so the lockfile is now pinned to
   `registry.npmjs.org`; a clean unauthenticated install and build pass.
-- The legacy Pages setting still publishes the raw repository root on pushes.
-  The
-  public page consequently serves the uncompiled Vite entry point
-  (`/src/main.tsx`) instead of the `dist/` application.
+- The legacy Pages setting publishes the raw repository root on pushes. The root
+  is therefore intentionally a self-contained temporary page with no build-time
+  dependency.
 
 The custom domain also failed HTTPS certificate validation when checked because
 the served certificate did not match `bodjitechnologies.com`. The site should be
@@ -82,6 +85,8 @@ A secondary manual AWS deployment path is documented in
 | Area | Purpose |
 | --- | --- |
 | `src/`, `public/` | Canonical build inputs for the legacy site. |
+| `index.html` | Temporary self-contained Coming Soon page. |
+| `src/full-site-index.template.html` | Preserved Vite entry shell for the full React application. |
 | `docs/deployment/` | GitHub Pages repair runbook and the secondary AWS deployment reference. |
 | `docs/archive/` | Historical PRDs, plans, audits, and messaging notes. |
 | `design/archive/google-studio/` | Preserved alternate Google AI Studio implementation; not a build input. |

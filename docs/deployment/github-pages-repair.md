@@ -10,14 +10,23 @@ not an instruction to deploy during routine repository maintenance.
   `registry.npmjs.org`; AWS or CodeArtifact authentication is not required.
 - `.github/workflows/deploy-pages.yml` is manual-only.
 - GitHub Pages is still configured externally as legacy source `main:/`.
-- The legacy publisher serves the raw root `index.html`, which imports
-  `/src/main.tsx`; it does not publish the compiled `dist/` application.
+- The legacy publisher currently serves the self-contained temporary Coming Soon
+  page from the repository-root `index.html`.
 - `bodjitechnologies.com` points to GitHub Pages, but HTTPS certificate
   validation failed because the served certificate did not match the domain.
 - A separate manual AWS path exists in [`aws.md`](aws.md). Do not operate both
   hosting paths as competing production owners.
 
 ## 1. Confirm the repository build
+
+If the full React application is being revived, first replace the temporary
+page with the preserved Vite entry shell:
+
+```sh
+cp src/full-site-index.template.html index.html
+```
+
+Commit that deliberate product change before deploying the full application.
 
 From the repository root:
 

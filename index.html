@@ -3,45 +3,392 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1E1C18" />
+    <meta name="theme-color" content="#f3f0e7" />
+    <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
-      content="Bodji Technologies builds products and consulting systems that help businesses become discoverable, trustworthy, and actionable in AI-driven markets."
+      content="Bodji Technologies is building governed systems for businesses and AI. A new site is coming soon."
     />
     <link rel="canonical" href="https://bodjitechnologies.com/" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..900;1,8..60,400..900&display=swap"
-      rel="stylesheet"
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231b2421'/%3E%3Cpath d='M18 16h11v10l8-5 9 5v22H35V35l-6 4v9H18V16Z' fill='%23d5a34a'/%3E%3C/svg%3E"
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Bodji Technologies" />
-    <meta
-      property="og:title"
-      content="Bodji Technologies | AI visibility, opportunity intelligence, and workflow consulting"
-    />
+    <meta property="og:title" content="Bodji Technologies — Coming Soon" />
     <meta
       property="og:description"
-      content="Products and consulting systems that help businesses become discoverable, trustworthy, and actionable in AI-driven markets."
+      content="Governed systems for businesses and AI. A new site is coming soon."
     />
     <meta property="og:url" content="https://bodjitechnologies.com/" />
-    <meta property="og:image" content="https://bodjitechnologies.com/favicon.png" />
     <meta name="twitter:card" content="summary" />
-    <meta
-      name="twitter:title"
-      content="Bodji Technologies | AI visibility, opportunity intelligence, and workflow consulting"
-    />
-    <meta
-      name="twitter:description"
-      content="Products and consulting systems that help businesses become discoverable, trustworthy, and actionable in AI-driven markets."
-    />
-    <title>Bodji Technologies | AI visibility, opportunity intelligence, and workflow consulting</title>
+    <title>Bodji Technologies — Coming Soon</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f3f0e7;
+        --paper-deep: #e9e4d7;
+        --ink: #1b2421;
+        --muted: #66706b;
+        --line: rgba(27, 36, 33, 0.13);
+        --mint: #b9d7c8;
+        --teal: #176f67;
+        --amber: #d5a34a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100svh;
+        overflow-x: hidden;
+        background:
+          radial-gradient(circle at 12% 18%, rgba(185, 215, 200, 0.72), transparent 28rem),
+          radial-gradient(circle at 88% 82%, rgba(213, 163, 74, 0.16), transparent 25rem),
+          var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        text-rendering: optimizeLegibility;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background-image:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 64px 64px;
+        opacity: 0.28;
+        mask-image: linear-gradient(to bottom, black, transparent 78%);
+      }
+
+      .page {
+        display: grid;
+        min-height: 100svh;
+        grid-template-rows: auto 1fr auto;
+        padding: clamp(24px, 4vw, 52px);
+      }
+
+      header,
+      footer {
+        display: flex;
+        width: 100%;
+        max-width: 1320px;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 13px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .mark {
+        width: 39px;
+        height: 39px;
+        filter: drop-shadow(0 8px 18px rgba(27, 36, 33, 0.12));
+      }
+
+      .wordmark {
+        display: grid;
+        line-height: 1;
+      }
+
+      .wordmark strong {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .wordmark span {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 13px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.42);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: 0.02em;
+        backdrop-filter: blur(12px);
+      }
+
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--teal);
+        box-shadow: 0 0 0 5px rgba(23, 111, 103, 0.1);
+      }
+
+      main {
+        display: grid;
+        width: 100%;
+        max-width: 1320px;
+        margin: 0 auto;
+        align-items: center;
+        padding: clamp(72px, 12vh, 140px) 0;
+      }
+
+      .content {
+        position: relative;
+        max-width: 880px;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 28px;
+        color: var(--teal);
+        font-size: 12px;
+        font-weight: 750;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 34px;
+        height: 1px;
+        content: "";
+        background: currentColor;
+      }
+
+      h1 {
+        max-width: 12ch;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(3.5rem, 7vw, 6.6rem);
+        font-weight: 400;
+        letter-spacing: -0.065em;
+        line-height: 0.9;
+      }
+
+      h1 em {
+        color: var(--teal);
+        font-weight: 400;
+      }
+
+      .lede {
+        max-width: 610px;
+        margin: clamp(28px, 4vw, 48px) 0 0;
+        color: var(--muted);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.15rem, 2vw, 1.45rem);
+        line-height: 1.55;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 38px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 50px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 20px;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+      }
+
+      .button.primary {
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button.primary:hover {
+        background: var(--teal);
+        border-color: var(--teal);
+      }
+
+      .arrow {
+        font-size: 17px;
+        line-height: 1;
+      }
+
+      .orb {
+        position: absolute;
+        top: 2%;
+        left: min(90%, 860px);
+        width: clamp(150px, 19vw, 260px);
+        aspect-ratio: 1;
+        border: 1px solid rgba(27, 36, 33, 0.12);
+        border-radius: 42% 58% 63% 37% / 45% 38% 62% 55%;
+        background:
+          radial-gradient(circle at 34% 29%, rgba(255, 255, 255, 0.84), transparent 25%),
+          linear-gradient(145deg, rgba(185, 215, 200, 0.8), rgba(23, 111, 103, 0.12));
+        box-shadow: 0 34px 70px rgba(27, 36, 33, 0.1);
+        transform: rotate(-9deg);
+        animation: drift 10s ease-in-out infinite alternate;
+      }
+
+      footer {
+        align-items: flex-end;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      footer .note {
+        max-width: 32ch;
+        text-align: right;
+      }
+
+      @keyframes drift {
+        to {
+          transform: translate(12px, -10px) rotate(3deg);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .orb {
+          top: -60px;
+          right: -100px;
+          left: auto;
+          opacity: 0.56;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .page {
+          padding: 22px;
+        }
+
+        .status {
+          display: none;
+        }
+
+        main {
+          padding: 72px 0 90px;
+        }
+
+        h1 {
+          font-size: clamp(3.15rem, 15vw, 4rem);
+          letter-spacing: -0.05em;
+        }
+
+        .eyebrow {
+          gap: 8px;
+          font-size: 10px;
+          letter-spacing: 0.12em;
+        }
+
+        .eyebrow::before {
+          width: 24px;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        footer {
+          gap: 24px;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        footer .note {
+          text-align: left;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="page">
+      <header>
+        <a class="brand" href="/" aria-label="Bodji Technologies home">
+          <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Bodji mark">
+            <rect width="64" height="64" rx="17" fill="#1b2421" />
+            <path d="M17 15h12v11l8-5 10 5v23H35V35l-6 4v10H17V15Z" fill="#d5a34a" />
+            <path d="m29 26 8-5 10 5-12 9-6-9Z" fill="#f1cd83" opacity=".76" />
+          </svg>
+          <span class="wordmark">
+            <strong>Bodji</strong>
+            <span>Technologies</span>
+          </span>
+        </a>
+        <span class="status"><span class="status-dot"></span> In development</span>
+      </header>
+
+      <main>
+        <section class="content">
+          <div class="orb" aria-hidden="true"></div>
+          <p class="eyebrow">A new site is taking shape</p>
+          <h1>We’re building what comes <em>next.</em></h1>
+          <p class="lede">
+            Bodji Technologies is developing governed systems that help businesses and AI work
+            together with greater clarity, trust, and accountability.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="mailto:sales@bodjisales.com?subject=Bodji%20Technologies">
+              Get in touch <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="button" href="https://bodji.ai/">
+              Visit Bodji.ai <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>© 2026 Bodji Technologies LLC</p>
+        <p class="note">Thoughtful infrastructure for an AI-shaped economy.</p>
+      </footer>
+    </div>
   </body>
 </html>
