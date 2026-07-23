@@ -18,10 +18,10 @@ The page should not feel like a generic AI consulting site. It should feel like 
 ## Source Inputs
 
 - `/Users/calebwilliams/bodji/beacon frontend notes.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-consulting-page-plan.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-messaging-notes.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-frontend-notes.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-visual-assets-audit.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-consulting-page-plan.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-messaging-notes.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-frontend-notes.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-visual-assets-audit.md`
 - Existing Beacon frontend: `/Users/calebwilliams/bodji/cw-beacon-frontend`
 - Existing Bodji Technologies repo: `/Users/calebwilliams/bodji/bodji-technologies`
 
@@ -227,7 +227,7 @@ The final CTA should reinforce that visitors can start with a diagnostic, educat
 
 Source audit:
 
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-visual-assets-audit.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-visual-assets-audit.md`
 
 ### Current Bodji Technologies Assets
 

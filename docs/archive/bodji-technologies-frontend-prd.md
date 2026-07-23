@@ -20,16 +20,16 @@ The new frontend should use the Google Studio design direction as the visual bas
 
 Planning inputs:
 
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-frontend-master-plan.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-consulting-page-plan.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-messaging-notes.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-frontend-notes.md`
-- `/Users/calebwilliams/bodji/bodji-technologies/bodji-technologies-visual-assets-audit.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-frontend-master-plan.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-consulting-page-plan.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-messaging-notes.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-frontend-notes.md`
+- `/Users/calebwilliams/bodji/bodji-technologies/docs/archive/bodji-technologies-visual-assets-audit.md`
 - `/Users/calebwilliams/bodji/beacon frontend notes.md`
 
 Design source:
 
-- `/Users/calebwilliams/bodji/bodji-technologies/google-studio-design/bodji-technologies`
+- `/Users/calebwilliams/bodji/bodji-technologies/design/archive/google-studio/bodji-technologies`
 
 Canonical Beacon frontend/tool sources:
 
@@ -789,4 +789,3 @@ Do not deploy if:
 - Whether the hero should include a third `Talk to Bodji` button or keep that lower on the page.
 - Whether to mention Signal anywhere or leave it out until it is more concrete.
 - Whether to preserve the current lab hero image anywhere as a consulting-specific visual.
-
